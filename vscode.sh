@@ -1,4 +1,5 @@
 # Vscode
+cd ~
 git clone https://aur.archlinux.org/snapd.git
 cd snapd
 makepkg -sif
