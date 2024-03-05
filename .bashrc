@@ -24,13 +24,28 @@ bash_prompt() {
     White="$(tput setaf 7)"
     dir="$(pwd)"
     date="$(date '+%X')"
-    width="$(($(tput cols)-${#date}-${#dir}-4))"
-    line="╭─ $Purple$dir$White "
-    for i in `seq 2 $width`
-    do
-        line+="─"
-    done
-    echo $line $Purple$date
-    echo "$White╰─ $Purple❱ $White"
+    home="/c/Users"
+    if [ "$dir" = "$home" ]
+    then
+        width="$((($(tput cols)-${#date}-${#dir}+7)/2))"
+        line="$Purple⌂$White"
+        for i in `seq 2 $width`
+        do
+            line+=" ·"
+        done
+
+        echo $line $Purple$date
+        echo "$Purple❱ $White"
+    else
+        width="$((($(tput cols)-${#date}-${#dir}+1)/2))"
+        line="$Purple$dir$White"
+        for i in `seq 2 $width`
+        do
+            line+=" ·"
+        done
+        echo $line$Purple$date
+        echo "$Purple❱ $White"
+    fi
 }
 PS1='$(bash_prompt)'
+
